@@ -2,12 +2,15 @@
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+import json
 import sys
 
 from orjson_perf import OrJsonPerf
 from simplejson_perf import SimpleJsonPerf
 from stdjson import StdJsonPerf
 from ujson_perf import UJsonPerf
+
+PRECISION_FORMAT = "{:.5f}"
 
 TIMES = 100000
 
@@ -123,17 +126,17 @@ def main():
             ["serialize"],
             ["deserialize"]
         ]
+        test_object = json.loads(cur_jsn)
         for p in perfs:
             total_time_took = timeit.timeit(lambda: p.deserialize(cur_jsn), number=TIMES)
-            took = total_time_took / TIMES
-            took_str = "{:f}".format(took)
+            took_ms = total_time_took / TIMES * 1000
+            took_str = PRECISION_FORMAT.format(took_ms)
             results[title][2].append(took_str)
-            print("{}: {:f}".format(p.name_with_version, took))
+            print("{}: {}".format(p.name_with_version, took_str))
 
-            obj = p.deserialize(cur_jsn)
-            total_time_took = timeit.timeit(lambda: p.serialize(obj), number=TIMES)
-            took = total_time_took / TIMES
-            took_str = "{:f}".format(took)
+            total_time_took = timeit.timeit(lambda: p.serialize(test_object), number=TIMES)
+            took_ms = total_time_took / TIMES * 1000
+            took_str = PRECISION_FORMAT.format(took_ms)
             results[title][1].append(took_str)
             # print(took)
             # if min_took != 0 and took > min_took:
@@ -144,7 +147,8 @@ def main():
             # print(autorange_took)
             # print(autorange_took[1] / autorange_took[0])
 
-    print(results)
+    with open('results.json', 'w') as f:
+        json.dump(results, f)
 
 if __name__ == '__main__':
     main()
