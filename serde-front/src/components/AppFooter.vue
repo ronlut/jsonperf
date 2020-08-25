@@ -1,7 +1,7 @@
 <template>
   <v-footer
-      light
-      padless
+      app
+      absolute
   >
     <v-col
         class="text-center text-overline"
