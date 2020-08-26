@@ -44,7 +44,7 @@ export default {
       file: null,
       loading: false,
       rules: [
-        value => !value || value.size < 2 || "File size must be less than 2 MB!"
+        value => !value || value.size < 2 * 1024 * 1024 || "File size must be less than 2 MB!"
       ]
     };
   },
