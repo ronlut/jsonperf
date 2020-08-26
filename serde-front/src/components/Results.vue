@@ -1,58 +1,39 @@
 <template>
   <v-container>
     <v-row class="text-center" align="center" justify="center">
-      <v-col v-for="(chartData, chartName) in chartsData" :key="chartName" cols="12" lg="6">
+      <v-col
+        v-for="(chartData, chartName) in chartsData"
+        :key="chartName"
+        cols="12"
+        lg="6"
+      >
         <span class="text-body-1">{{ chartName }}</span>
-        <v-chart style="" class="" autoresize :options="generateOptions(chartName, chartData)" :theme="chartTheme"></v-chart>
+        <v-chart
+          autoresize
+          :options="generateOptions(chartName, chartData)"
+          :theme="chartTheme"
+        ></v-chart>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import 'echarts/lib/component/tooltip'
-import 'echarts/lib/component/legend'
-import 'echarts/lib/component/title'
-import 'echarts/lib/component/dataset'
-import 'echarts/lib/component/toolbox'
+import "echarts/lib/component/tooltip";
+import "echarts/lib/component/legend";
+import "echarts/lib/component/title";
+import "echarts/lib/component/dataset";
+import "echarts/lib/component/toolbox";
+
 export default {
   name: "Results",
   props: {
     chartsData: {
       type: Object,
-      default: function () {
-        return {
-          "tiny (50 bytes)": [
-            ['test', 'rapid', 'ujson', 'bla', 'bla2'],
-            ['serialize', 0.0001, 0.0004, 0.0004, 0.0004],
-            ['deserialize', 0.0005, 0.0002, 0.0004, 0.0004],
-            // ['serialize (3.5 kb)', 0.0005, 0.0002],
-            // ['deserialize (3.5 kb)', 0.0005, 0.0002],
-          ],
-          "small (3.5 kb)": [
-            ["test", "rapid", "ujson"],
-            ['serialize', 0.0001, 0.0004],
-            ['deserialize', 0.0005, 0.0002],
-            // ['serialize (3.5 kb)', 0.0005, 0.0002],
-            // ['deserialize (3.5 kb)', 0.0005, 0.0002],
-          ],
-          "large (50 bytes)": [
-            ["test", "rapid", "ujson"],
-            ['serialize', 0.0001, 0.0004],
-            ['deserialize', 0.0005, 0.0002],
-            // ['serialize (3.5 kb)', 0.0005, 0.0002],
-            // ['deserialize (3.5 kb)', 0.0005, 0.0002],
-          ],
-          "llarge (50 bytes)": [
-            ["test", "rapid", "ujson"],
-            ['serialize', 0.0001, 0.0004],
-            ['deserialize', 0.0005, 0.0002],
-            // ['serialize (3.5 kb)', 0.0005, 0.0002],
-            // ['deserialize (3.5 kb)', 0.0005, 0.0002],
-          ]
-        }
+      default: function() {
+        return {};
       }
-    },
+    }
   },
   methods: {
     generateOptions(title, dataset) {
@@ -70,52 +51,50 @@ export default {
           feature: {
             saveAsImage: {
               title: "Save as PNG"
-            },
+            }
           }
         },
         legend: {},
         tooltip: {
-          trigger: 'axis',
+          trigger: "axis",
           axisPointer: {
-            type: 'shadow'
+            type: "shadow"
           }
         },
         dataset: {
-          source: dataset,
+          source: dataset
         },
-        xAxis: { type: 'category' },
+        xAxis: { type: "category" },
         yAxis: {
-          type: 'value',
-          axisLabel : {
-            formatter: '{value} ms'
-          },
-          // name: 'Time (ms)',
-          // nameLocation: 'middle',
-          // nameGap: 45,
+          type: "value",
+          // axisLabel: {
+          //   formatter: "{value} ms"
+          // }
+          name: "Time (ms)",
+          nameLocation: "middle",
+          nameGap: 45
         },
         series: []
       };
-      for (let i=0; i < dataset[0].length - 1; i++) {
-        options.series.push({ type: 'bar' });
+      for (let i = 0; i < dataset[0].length - 1; i++) {
+        options.series.push({ type: "bar" });
       }
       return options;
     }
   },
   computed: {
     chartTheme() {
-      return this.$vuetify.theme.dark ? "dark" : "light";
+      return this.$vuetify.theme.dark ? "dark" : "light"; // light
     }
   },
-  data: () => ({
-
-  })
+  data: () => ({})
 };
 </script>
 
 <style>
-  div.echarts {
-    min-height: 300px;
-    width: 100%;
-    height: 100%;
-  }
+div.echarts {
+  min-height: 400px;
+  width: 100%;
+  height: 100%;
+}
 </style>

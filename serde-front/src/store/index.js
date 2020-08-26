@@ -11,7 +11,7 @@ export default new Vuex.Store({
   },
   mutations: {
     toggleDark(state) {
-      state.dark = !state.dark
+      state.dark = !state.dark;
     }
   },
   actions: {},

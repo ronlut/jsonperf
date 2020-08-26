@@ -1,19 +1,19 @@
 <template>
   <v-app>
     <TopBar
-        v-model="selectedTab"
-        :frameworks="frameworks"
-        @input="tabChanged"
+      v-model="selectedTab"
+      :frameworks="frameworks"
+      @input="tabChanged"
     />
     <v-main>
       <v-alert
-          v-model="showAlert"
-          type="warning"
-          border="left"
-          elevation="2"
-          @click="clearUserSelection"
-          class="text-center"
-          style="cursor: pointer"
+        v-model="showAlert"
+        type="warning"
+        border="left"
+        elevation="2"
+        @click="clearUserSelection"
+        class="text-center"
+        style="cursor: pointer"
       >
         Showing custom results - <b>click to reset</b>
       </v-alert>
@@ -24,39 +24,32 @@
           </v-col>
           <v-divider></v-divider>
           <v-col cols="10" lg="4">
-            <TestFile :framework="frameworks[selectedTab].title" @input="upload" />
+            <UserBenchmark
+              :framework="frameworks[selectedTab].title"
+              @input="userJsonSent"
+            />
           </v-col>
         </v-row>
       </v-container>
     </v-main>
-
-    <AppFooter />
-    <v-snackbar
-        v-model="showSnackbar"
-        top
-        color="info"
-        :timeout="4000"
-    >
-      Custom JSON result in was reset
+    <Footer />
+    <v-snackbar v-model="snackbar" top :color="snackbarColor" :timeout="4000">
+      {{ snackbarText }}
     </v-snackbar>
   </v-app>
 </template>
 
 <script>
 import Results from "@/components/Results";
-import PYTHON3_WEEKLY from '@/data/python3.json'
-import PYTHON2_WEEKLY from '@/data/python2.json'
-import JAVA_WEEKLY from '@/data/java.json'
-import AppFooter from "@/components/AppFooter";
-import TestFile from "@/components/TestFile";
+import PYTHON3_WEEKLY from "@/weekly_results/python3.json"; // todo: ugly.
+import Footer from "@/components/Footer";
+import UserBenchmark from "@/components/UserBenchmark";
 import TopBar from "@/components/TopBar";
 
 export default {
-  components: {TopBar, TestFile, AppFooter, Results },
+  components: { TopBar, UserBenchmark, Footer, Results },
   WEEKLY_RESULTS: {
-    python2: PYTHON2_WEEKLY,
-    python3: PYTHON3_WEEKLY,
-    java: JAVA_WEEKLY
+    python3: PYTHON3_WEEKLY
   },
   props: {
     source: String
@@ -77,23 +70,38 @@ export default {
     }
   },
   data: () => ({
-    showSnackbar: false,
+    loading: false,
+    snackbar: false,
+    snackbarText: "",
+    snackbarColor: "",
     userResults: null,
     frameworks: {
-      'python2': {title: 'Python 2', icon: 'mdi-language-python'},
-      'python3': {title: 'Python 3', icon: 'mdi-language-python'},
-      'java': {title: 'Java', icon: 'mdi-language-java'},
+      python3: { title: "Python 3", icon: "mdi-language-python" },
+      python2: { title: "Python 2", icon: "mdi-language-python" },
+      java: { title: "Java", icon: "mdi-language-java" },
+      golang: { title: "Go", icon: "mdi-language-go" },
+      javascript: { title: "JavaScript", icon: "mdi-language-javascript" }
     },
-    selectedTab: "python2",
+    selectedTab: "python3"
   }),
   methods: {
-    upload(file) {
-      console.log(file);
-      this.scrollToTop();
-      this.userResults = PYTHON3_WEEKLY; // todo: delete
-      // todo: show notification
-      // todo: send to backend, if successful set result to userResults
-      // todo: clean userResults when clearing notification
+    userJsonSent(promise) {
+      promise
+        .then(response => {
+          this.scrollToTop();
+          this.userResults = response.data; // todo: delete
+        })
+        .catch(error => {
+          this.showSnackbar(
+            `${error.message}: ${error.response.data}`,
+            "error"
+          );
+        });
+    },
+    showSnackbar(text, color) {
+      this.snackbarText = text;
+      this.snackbarColor = color;
+      this.snackbar = true;
     },
     clearUserSelection() {
       this.userResults = null;
@@ -102,7 +110,7 @@ export default {
       window.scroll({
         top: 0,
         left: 0,
-        behavior: 'smooth'
+        behavior: "smooth"
       });
     },
     tabChanged() {
@@ -112,9 +120,9 @@ export default {
         return;
       }
 
-      this.showSnackbar = true;
+      this.showSnackbar("Custom JSON result was reset", "info");
       this.clearUserSelection();
     }
-  },
+  }
 };
 </script>
