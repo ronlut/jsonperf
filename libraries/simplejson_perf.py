@@ -2,7 +2,7 @@ from typing import Union
 
 import simplejson
 
-from serde_perf import SerdePerf
+from libraries.serde_perf import SerdePerf
 
 
 class SimpleJsonPerf(SerdePerf):

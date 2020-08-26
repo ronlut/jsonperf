@@ -1,4 +1,4 @@
-from serde_perf import SerdePerf
+from .serde_perf import SerdePerf
 import orjson
 
 

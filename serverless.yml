@@ -1,0 +1,38 @@
+service: serverless-flask
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+  - serverless-finch
+package:
+  exclude:
+    - 'venv/**'
+custom:
+  wsgi:
+    app: app.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: non-linux
+    slim: true
+    slimPatterns:
+      - 'venv/'
+  siteName: jsonperf.com
+  client:
+    bucketName: ${self:custom.siteName}
+    distributionFolder: serde-front/dist
+    bucketPolicyFile: ${env:PWD}/bucket_policy.json
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: dev
+  region: us-east-1
+
+functions:
+  python3:
+    handler: wsgi_handler.handler
+    events:
+      - http:
+          method: post
+          path: /python3
+          cors: false

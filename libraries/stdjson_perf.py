@@ -1,4 +1,4 @@
-from serde_perf import SerdePerf
+from libraries.serde_perf import SerdePerf
 import json
 
 
