@@ -1,4 +1,7 @@
 name: Deploy to github pages
+  defaults:
+    run:
+      working-directory: frontend
   on:
     push:
       branches:
