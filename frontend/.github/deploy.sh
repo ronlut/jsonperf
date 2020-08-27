@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # abort on errors
-set -e
+set -ex
 
 # build
 yarn run build
@@ -12,9 +12,8 @@ cd dist
 # if you are deploying to a custom domain
 echo 'jsonperf.com' > CNAME
 
-
 git init
-git config user.name "github-actions[bot]" && git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+git config user.name "GitHub Actions" && git config user.email "actions@github.com"
 git add -A
 git commit -m 'deploy' --author="${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
 
