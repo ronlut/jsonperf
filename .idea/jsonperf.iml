@@ -3,9 +3,9 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.serverless" />
-      <excludeFolder url="file://$MODULE_DIR$/data" />
+      <excludeFolder url="file://$MODULE_DIR$/frontend" />
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
-      <excludeFolder url="file://$MODULE_DIR$/serde-front" />
+      <excludeFolder url="file://$MODULE_DIR$/test_jsons" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="inheritedJdk" />
