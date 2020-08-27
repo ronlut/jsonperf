@@ -6,9 +6,9 @@ import libraries
 from web import chart
 
 JSONS = {
-    "tiny (50 bytes)": {"path": Path('data/tiny.json'), "times": 10000},
-    "small (3.5 kb)": {"path": Path('data/small.json'), "times": 10000},
-    "large (630 kb)": {"path": Path('data/large.json'), "times": 100},
+    "tiny (50 bytes)": {"path": Path('test_jsons/tiny.json'), "times": 10000},
+    "small (3.5 kb)": {"path": Path('test_jsons/small.json'), "times": 10000},
+    "large (630 kb)": {"path": Path('test_jsons/large.json'), "times": 100},
 }
 
 
