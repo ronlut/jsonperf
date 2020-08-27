@@ -3,20 +3,15 @@
 # abort on errors
 set -ex
 
+git checkout --orphan gh-pages
+git config user.name "GitHub Actions" && git config user.email "actions@github.com"
+
 # build
 yarn run build
+echo 'jsonperf.com' > dist/CNAME
 
-# navigate into the build output directory
-cd dist
+git --work-tree dist add --all
 
-# if you are deploying to a custom domain
-echo 'jsonperf.com' > CNAME
+git --work-tree dist commit -m 'deploy' --author="${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
 
-git init
-git config user.name "GitHub Actions" && git config user.email "actions@github.com"
-git add -A
-git commit -m 'deploy' --author="${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
-
-git push -f git@github.com:ronlut/jsonperf.git master:gh-pages
-
-cd -
+git push -f origin HEAD:gh-pages
