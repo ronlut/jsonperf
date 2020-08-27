@@ -12,7 +12,9 @@ cd dist
 # if you are deploying to a custom domain
 echo 'jsonperf.com' > CNAME
 
+
 git init
+git config user.name "github-actions[bot]" && git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 git add -A
 git commit -m 'deploy' --author="${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
 
