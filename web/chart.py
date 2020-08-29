@@ -1,7 +1,8 @@
 from typing import Tuple, List
 
 
-def generate_chart_data(results: List[Tuple[str, dict]], precision_format: str = "{:.5f}"):
+def generate_chart_data(results, precision_format="{:.5f}"):
+    # type: (List[Tuple[str, dict]], str) -> dict
     chart_data = {}
     for title, json_results in results:
         chart_data[title] = [

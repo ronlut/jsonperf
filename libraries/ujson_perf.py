@@ -6,8 +6,10 @@ class UJsonPerf(SerdePerf):
     name = "ujson"
     module = ujson
 
-    def serialize(self, obj: object):
+    def serialize(self, obj):
+        # type: (object) -> None
         ujson.dumps(obj)
 
-    def deserialize(self, jsn: str):
+    def deserialize(self, jsn):
+        # type: ([bytes, str]) -> None
         ujson.loads(jsn)

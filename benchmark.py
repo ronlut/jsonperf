@@ -1,25 +1,27 @@
 import json
 import timeit
-from dataclasses import dataclass
 from typing import List
 
 from libraries.serde_perf import SerdePerf
 
 
-@dataclass
 class BenchmarkResult:
-    serialize: float
-    deserialize: float
+    def __init__(self, serialize, deserialize):
+        # type: (float, float) -> None
+        self.serialize = serialize
+        self.deserialize = deserialize
 
 
 class Benchmark:
     TIMES = 10000
     REPEAT = 10
 
-    def __init__(self, libraries: List[SerdePerf]):
+    def __init__(self, libraries):
+        # type: (List[SerdePerf]) -> None
         self.libraries = libraries
 
-    def run(self, test_json: str, times: int = TIMES, repeat: int = REPEAT) -> dict:
+    def run(self, test_json, times=TIMES, repeat=REPEAT):
+        # type: (str, int, int) -> dict
         result = {}
         test_object = json.loads(test_json)
         for p in self.libraries:

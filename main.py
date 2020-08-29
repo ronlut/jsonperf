@@ -1,5 +1,10 @@
 import json
-from pathlib import Path
+import six
+
+if six.PY3:
+    from pathlib import Path
+else:
+    from pathlib2 import Path
 
 import benchmark
 import libraries
@@ -18,9 +23,10 @@ def main():
     bnch = benchmark.Benchmark(perfs_ab_sorted)
     results = []
     for title, config in JSONS.items():
-        with config["path"].open('r') as f:
+        with config["path"].open('rt', encoding='utf-8') as f:
             cur_jsn = f.read()
 
+        cur_jsn = six.ensure_str(cur_jsn)  # this is needed for python 2
         result = bnch.run(cur_jsn, config.get("times"))
         results.append((title, result))
 

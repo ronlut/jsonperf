@@ -1,14 +1,18 @@
-from abc import ABC, abstractmethod
-from typing import Union
+from abc import ABCMeta, abstractmethod
+
+import six
 
 
-class SerdePerf(ABC):
+@six.add_metaclass(ABCMeta)
+class SerdePerf:
     @abstractmethod
-    def serialize(self, obj: object):
+    def serialize(self, obj):
+        # type: (object) -> None
         pass
 
     @abstractmethod
-    def deserialize(self, jsn: Union[bytes, str]):
+    def deserialize(self, jsn):
+        # type: ([bytes, str]) -> None
         pass
 
     @property
@@ -22,5 +26,9 @@ class SerdePerf(ABC):
         pass
 
     @property
+    def version(self):
+        return self.module.__version__
+
+    @property
     def name_with_version(self):
-        return "{} {}".format(self.name, self.module.__version__)
+        return "{} {}".format(self.name, self.version)
