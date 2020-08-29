@@ -25,7 +25,8 @@
           <v-divider></v-divider>
           <v-col cols="10" lg="4">
             <UserBenchmark
-              :framework="frameworks[selectedTab].title"
+              :frameworks="frameworks"
+              :selected-framework="selectedTab"
               @input="userJsonSent"
             />
           </v-col>

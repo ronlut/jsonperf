@@ -6,7 +6,7 @@
     :style="`border-color: ${$vuetify.theme.currentTheme.accent};`"
   >
     <span class="text-sm-h5 text-h6"
-      >Benchmark with your JSON ({{ framework }})</span
+      >Benchmark with your JSON ({{ frameworks[selectedFramework].title }})</span
     >
     <v-file-input
       v-model="file"
@@ -34,9 +34,15 @@ import axios from "axios";
 export default {
   name: "UserBenchmark",
   props: {
-    framework: {
+    selectedFramework: {
       type: String,
       default: ""
+    },
+    frameworks: {
+      type: Object,
+      default: function() {
+        return {};
+      }
     }
   },
   data() {
@@ -53,7 +59,7 @@ export default {
       this.loading = true;
       let formData = new FormData();
       formData.append("file", this.file);
-      let uploadPromise = axios.post("/python3", formData, {
+      let uploadPromise = axios.post(`/${this.selectedFramework}`, formData, {
         baseURL: process.env.VUE_APP_API_BASE_URL, // todo: one instance per app
         headers: {
           "Content-Type": "multipart/form-data"
