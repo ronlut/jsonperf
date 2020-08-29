@@ -31,6 +31,6 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          commit-message: [auto] Update Results
-          title: [auto] Update Results
+          commit-message: "[auto] Update Results"
+          title: "[auto] Update Results"
           assignees: ronlut
