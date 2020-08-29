@@ -80,7 +80,11 @@ export default {
       python2: { title: "Python 2", icon: "mdi-language-python" },
       java: { title: "Java", icon: "mdi-language-java" },
       golang: { title: "Go", icon: "mdi-language-go" },
-      javascript: { title: "JavaScript", icon: "mdi-language-javascript" }
+      javascript: { title: "JavaScript", icon: "mdi-language-javascript" },
+      // ruby: { title: "Ruby", icon: "mdi-language-ruby" },
+      // rust: { title: "Rust", icon: "mdi-language-rust" }, // todo: rust icon unavailable
+      // c: { title: "C", icon: "mdi-language-c" },
+      // cpp: { title: "C++", icon: "mdi-language-cpp" }
     },
     selectedTab: "python3"
   }),
