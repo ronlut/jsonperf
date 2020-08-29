@@ -29,7 +29,7 @@
           v-for="(framework, key, i) in frameworks"
           :key="key"
           :href="`#${key}`"
-          :disabled="i !== 0"
+          :disabled="i > 1"
         >
           <v-icon left>{{ framework.icon }}</v-icon>
           {{ framework.title }}

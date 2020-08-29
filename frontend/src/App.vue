@@ -42,6 +42,7 @@
 <script>
 import Results from "@/components/Results";
 import PYTHON3_RESULTS from "@/generated_results/python3.json"; // todo: ugly.
+import PYTHON2_RESULTS from "@/generated_results/python2.json"; // todo: ugly.
 import Footer from "@/components/Footer";
 import UserBenchmark from "@/components/UserBenchmark";
 import TopBar from "@/components/TopBar";
@@ -49,7 +50,8 @@ import TopBar from "@/components/TopBar";
 export default {
   components: { TopBar, UserBenchmark, Footer, Results },
   RESULTS: {
-    python3: PYTHON3_RESULTS
+    python3: PYTHON3_RESULTS,
+    python2: PYTHON2_RESULTS
   },
   props: {
     source: String
