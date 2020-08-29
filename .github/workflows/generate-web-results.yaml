@@ -7,7 +7,7 @@ on:
       - frontend/**
 jobs:
   python3_benchmark:
-    name: Run python 3 benchmark
+    name: Run python benchmark
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -32,5 +32,6 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           commit-message: "[auto] Update Results"
-          title: "[auto] Update Results"
+          title: "[auto] Updated Results for Python ${{ matrix.python-version }}"
           assignees: ronlut
+          branch: auto-results/python${{ matrix.python-version }}
