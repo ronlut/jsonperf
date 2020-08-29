@@ -41,22 +41,22 @@
 
 <script>
 import Results from "@/components/Results";
-import PYTHON3_WEEKLY from "@/weekly_results/python3.json"; // todo: ugly.
+import PYTHON3_RESULTS from "@/generated_results/python3.json"; // todo: ugly.
 import Footer from "@/components/Footer";
 import UserBenchmark from "@/components/UserBenchmark";
 import TopBar from "@/components/TopBar";
 
 export default {
   components: { TopBar, UserBenchmark, Footer, Results },
-  WEEKLY_RESULTS: {
-    python3: PYTHON3_WEEKLY
+  RESULTS: {
+    python3: PYTHON3_RESULTS
   },
   props: {
     source: String
   },
   computed: {
     results() {
-      let results = Object.assign({}, this.$options.WEEKLY_RESULTS);
+      let results = Object.assign({}, this.$options.RESULTS);
       if (!this.userResults) {
         return results;
       }
