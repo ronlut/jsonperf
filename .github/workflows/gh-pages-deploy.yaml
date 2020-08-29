@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - frontend/**
 jobs:
   gh-pages-deploy:
     name: Deploying to gh-pages
