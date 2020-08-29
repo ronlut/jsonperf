@@ -4,7 +4,7 @@
 set -ex
 
 git checkout --orphan gh-pages
-git config user.name "GitHub Actions" && git config user.email "actions@github.com"
+git config user.name "GitHub" && git config user.email "noreply@github.com"
 
 # build
 yarn run build

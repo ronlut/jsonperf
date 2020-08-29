@@ -9,6 +9,14 @@ on:
     paths:
       - frontend/**
 jobs:
+  pre-ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: 'Block Concurrent Executions'
+        uses: softprops/turnstyle@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   gh-pages-deploy:
     name: Deploying to gh-pages
     runs-on: ubuntu-latest
