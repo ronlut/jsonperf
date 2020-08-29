@@ -1,0 +1,36 @@
+name: Generate static json results
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - frontend/**
+jobs:
+  python3_benchmark:
+    name: Run python 3 benchmark
+    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        python-version: [ '2.x', '3.x', 'pypy2', 'pypy3' ]
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+#          python-version: ${{ matrix.python-version }}
+
+      - name: Install requirements
+        run: pip install -r requirements.txt
+
+      - name: Run benchmark
+        run: |
+          python main.py
+          mv results.json frontend/src/generated_results/python3.json
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: [auto] Update Results
+          title: [auto] Update Results
+          assignees: ronlut
