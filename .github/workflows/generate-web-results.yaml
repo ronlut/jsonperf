@@ -6,9 +6,12 @@ on:
     paths-ignore:
       - frontend/**
 jobs:
-  python3_benchmark:
-    name: Run python benchmark
+  python_benchmark:
+    name: Run python benchmarks
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: python
     strategy:
       matrix:
 #        python-version: [ '2', '3', 'pypy2', 'pypy3' ]
@@ -26,7 +29,7 @@ jobs:
       - name: Run benchmark
         run: |
           python main.py
-          mv results.json frontend/src/generated_results/python${{ matrix.python-version }}.json
+          mv results.json ../frontend/src/generated_results/python${{ matrix.python-version }}.json
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
