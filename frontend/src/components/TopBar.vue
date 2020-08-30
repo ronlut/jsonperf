@@ -13,6 +13,9 @@
       >JSON Libraries Performance Benchmark
     </v-toolbar-title>
     <v-spacer></v-spacer>
+    <v-btn icon href="https://github.com/ronlut/jsonperf" target="_blank">
+      <v-icon>mdi-github</v-icon>
+    </v-btn>
     <v-btn icon @click="toggleDark">
       <v-icon>mdi-brightness-6</v-icon>
     </v-btn>
