@@ -75,6 +75,10 @@ jobs:
             version: 3.8
             dir: python
             sls_file: serverless_py3.yml
+          - language: python
+            version: 2.7
+            dir: python
+            sls_file: serverless_py2.yml
     steps:
       - uses: actions/checkout@v2
 
