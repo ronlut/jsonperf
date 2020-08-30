@@ -93,7 +93,7 @@ jobs:
           python-version: "${{ matrix.setup.version }}"
 
       - name: install serverless and dependencies
-        run: npm install serverless && npm install
+        run: yarn add serverless && yarn install
 
       - name: Deploy
 # working-directory: {{ matrix.dir }}
