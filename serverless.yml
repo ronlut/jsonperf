@@ -1,30 +1,28 @@
-service: serverless-flask
-
-plugins:
-  - serverless-python-requirements
-  - serverless-wsgi
-package:
-  exclude:
-    - 'venv/**'
-custom:
-  wsgi:
-    app: app.app
-    packRequirements: false
-  pythonRequirements:
-    dockerizePip: non-linux
-    slim: true
+service: api 
 
 provider:
   name: aws
-  runtime: python3.8
   stage: dev
   region: us-east-1
 
-functions:
-  python3:
-    handler: wsgi_handler.handler
-    events:
-      - http:
-          method: post
-          path: /python3
-          cors: false
+resources:
+  Resources:
+    LanguagesApiGw:
+      Type: AWS::ApiGateway::RestApi
+      Properties:
+        Name: LanguagesApiGw
+
+  Outputs:
+    apiGatewayRestApiId:
+      Value:
+        Ref: LanguagesApiGw
+      Export:
+        Name: LanguagesApiGw-restApiId
+
+    apiGatewayRestApiRootResourceId:
+      Value:
+        Fn::GetAtt:
+          - LanguagesApiGw
+          - RootResourceId
+      Export:
+        Name: LanguagesApiGw-rootResourceId

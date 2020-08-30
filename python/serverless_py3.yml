@@ -1,0 +1,40 @@
+service: python3
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+
+package:
+  exclude:
+    - 'venv*/**'
+
+custom:
+  wsgi:
+    app: app.app
+    packRequirements: false
+  pythonRequirements:
+    fileName: requirements_py3.txt
+    dockerizePip: non-linux
+    slim: true
+
+provider:
+  name: aws
+  stage: dev
+  region: us-east-1
+  runtime: python3.8
+  apiGateway:
+    restApiId:
+      'Fn::ImportValue': LanguagesApiGw-restApiId
+    restApiRootResourceId:
+      'Fn::ImportValue': LanguagesApiGw-rootResourceId
+    websocketApiId:
+      'Fn::ImportValue': LanguagesApiGw-websocketApiId
+
+functions:
+  python3:
+    handler: wsgi_handler.handler
+    events:
+      - http:
+          method: post
+          path: /python3
+          cors: false
