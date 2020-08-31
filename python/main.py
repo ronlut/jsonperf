@@ -11,9 +11,9 @@ import libraries
 from web import chart
 
 JSONS = {
-    "tiny (50 bytes)": {"path": Path('../test_jsons/tiny.json'), "times": 10000},
-    "small (3.5 kb)": {"path": Path('../test_jsons/small.json'), "times": 10000},
-    "large (630 kb)": {"path": Path('../test_jsons/large.json'), "times": 100},
+    "tiny (50 bytes)": {"path": Path('../test_jsons/tiny.json'), "url": "https://github.com/ronlut/jsonperf/blob/master/test_jsons/tiny.json", "times": 10000},
+    "small (3.5 kb)": {"path": Path('../test_jsons/small.json'), "url": "https://github.com/ronlut/jsonperf/blob/master/test_jsons/small.json", "times": 10000},
+    "large (630 kb)": {"path": Path('../test_jsons/large.json'), "url": "https://github.com/ronlut/jsonperf/blob/master/test_jsons/large.json", "times": 100},
 }
 
 
@@ -30,7 +30,7 @@ def main():
         result = bnch.run(cur_jsn, config.get("times"))
         results.append((title, result))
 
-    chart_data = chart.generate_chart_data(results)
+    chart_data = chart.generate_chart_data(results, urls=[config['url'] for config in JSONS.values()])
     with open('results.json', 'w') as f:
         json.dump(chart_data, f)
 
