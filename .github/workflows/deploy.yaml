@@ -96,7 +96,6 @@ jobs:
         run: yarn add serverless && yarn install
 
       - name: Deploy
-# working-directory: {{ matrix.dir }}
         run: npx serverless deploy --config ${{ matrix.setup.sls_file }}
         env:
           SLS_DEBUG: 1
