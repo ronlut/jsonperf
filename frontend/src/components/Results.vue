@@ -2,15 +2,21 @@
   <v-container>
     <v-row class="text-center" align="center" justify="center">
       <v-col
-        v-for="(chartData, chartName) in chartsData"
-        :key="chartName"
+        v-for="chartData in chartsData"
+        :key="chartData.title"
         cols="12"
         lg="6"
       >
-        <span class="text-body-1">{{ chartName }}</span>
+        <span class="text-body-1">{{ chartData.title }}</span>
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn icon v-if="chartData.url" :href="chartData.url" target="_blank" v-bind="attrs" v-on="on"><v-icon>mdi-open-in-new</v-icon></v-btn>
+          </template>
+          <span>View JSON</span>
+        </v-tooltip>
         <v-chart
           autoresize
-          :options="generateOptions(chartName, chartData)"
+          :options="generateOptions(chartData.title, chartData.data)"
           :theme="chartTheme"
         ></v-chart>
       </v-col>
@@ -29,9 +35,9 @@ export default {
   name: "Results",
   props: {
     chartsData: {
-      type: Object,
+      type: Array,
       default: function() {
-        return {};
+        return [];
       }
     }
   },

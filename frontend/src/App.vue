@@ -15,7 +15,7 @@
         class="text-center"
         style="cursor: pointer"
       >
-        Showing results for <span class="text-truncate font-italic">{{ userFileName }}</span> <span class="font-weight-bold">click to reset</span>
+        Showing results for <span class="font-italic">{{ userFileName }}</span> <span class="font-weight-bold">click to reset</span>
       </v-alert>
       <v-container fluid>
         <v-row align="center" justify="center" class="text-center">
@@ -61,12 +61,7 @@ export default {
     userFileName() {
       const maxFileName = 25;
       let result = this.results[this.selectedTab];
-      let keys = Object.keys(result);
-      if (keys.length === 0) {
-        return "custom file";
-      }
-
-      let fileName = keys[0];
+      let fileName = result[0].title;
       return fileName.length > maxFileName
         ? fileName.substring(0, maxFileName-3) + "..."
         : fileName;
