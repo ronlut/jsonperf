@@ -15,7 +15,7 @@
         class="text-center"
         style="cursor: pointer"
       >
-        Showing custom results - <b>click to reset</b>
+        Showing results for <span class="text-truncate font-italic">{{ userFileName }}</span> <span class="font-weight-bold">click to reset</span>
       </v-alert>
       <v-container fluid>
         <v-row align="center" justify="center" class="text-center">
@@ -58,6 +58,19 @@ export default {
     source: String
   },
   computed: {
+    userFileName() {
+      const maxFileName = 25;
+      let result = this.results[this.selectedTab];
+      let keys = Object.keys(result);
+      if (keys.length === 0) {
+        return "custom file";
+      }
+
+      let fileName = keys[0];
+      return fileName.length > maxFileName
+        ? fileName.substring(0, maxFileName-3) + "..."
+        : fileName;
+    },
     results() {
       let results = Object.assign({}, this.$options.RESULTS);
       if (!this.userResults) {
