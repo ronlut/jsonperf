@@ -45,7 +45,7 @@ def test():
     test_json = six.ensure_str(test_json)
 
     try:
-        json.loads(test_json)
+        json.loads(test_json)  # validate json
     except ValueError:
         return 'invalid json', 400
 
