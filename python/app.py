@@ -1,3 +1,5 @@
+import json
+
 import six
 import werkzeug
 from flask import Flask, request, jsonify
@@ -41,6 +43,11 @@ def test():
         return 'empty file', 400
 
     test_json = six.ensure_str(test_json)
+
+    try:
+        json.loads(test_json)
+    except ValueError:
+        return 'invalid json', 400
 
     results = [(filename, BNCH.run(test_json, 100, 1))] # todo: dynamic times
 
