@@ -10,7 +10,7 @@ else:
 
 import benchmark
 import libraries
-from web import chart
+from web import charts
 
 JSONS = OrderedDict([("tiny (50 bytes)", {"path": Path('../test_jsons/tiny.json'),
                                           "url": "https://github.com/ronlut/jsonperf/blob/master/test_jsons/tiny.json",
@@ -36,7 +36,7 @@ def main():
         result = bnch.run(cur_jsn, config.get("times"))
         results.append((title, result))
 
-    chart_data = chart.generate_chart_data(results, urls=[config['url'] for config in JSONS.values()])
+    chart_data = charts.from_results(results, urls=[config['url'] for config in JSONS.values()])
     with open('results.json', 'w') as f:
         json.dump(chart_data, f)
 
