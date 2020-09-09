@@ -19,6 +19,7 @@
           :options="generateOptions(chartData.title, chartData.data)"
           :theme="chartTheme"
         ></v-chart>
+        <span class="text-body-2 font-italic timestamp">{{ chartData.timestamp_s | dateTime }}</span>
       </v-col>
     </v-row>
   </v-container>
@@ -30,6 +31,7 @@ import "echarts/lib/component/legend";
 import "echarts/lib/component/title";
 import "echarts/lib/component/dataset";
 import "echarts/lib/component/toolbox";
+import moment from "moment";
 
 export default {
   name: "Results",
@@ -41,12 +43,23 @@ export default {
       }
     }
   },
+  filters: {
+    dateTime: function (value) {
+      if (!value) return "";
+      let time = moment.unix(value);
+      return time.format("MMMM Do YYYY, HH:mm:ss");
+    }
+  },
   methods: {
     generateOptions(title, dataset) {
       let containLabel = this.$vuetify.breakpoint.smAndDown;
       let options = {
         grid: {
-          containLabel: containLabel
+          containLabel: containLabel,
+          // left: 10,
+          // right: 0,
+          // top: "10%",
+          bottom: "5%"
         },
         backgroundColor: this.$vuetify.theme.dark ? "#121212" : undefined, // todo: get from current theme
         // title: {
@@ -97,10 +110,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 div.echarts {
   min-height: 400px;
   width: 100%;
   height: 100%;
+}
+.timestamp {
+  color: gray;
 }
 </style>

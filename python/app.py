@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 
 import benchmark
 import libraries
-from web import chart
+from web import charts
 
 app = Flask(__name__, static_folder=None)
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 2
@@ -51,7 +51,7 @@ def test():
 
     results = [(filename, BNCH.run(test_json, 100, 1))] # todo: dynamic times
 
-    chart_data = chart.generate_chart_data(results)
+    chart_data = charts.from_results(results)
     return jsonify(chart_data)
 
 

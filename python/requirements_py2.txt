@@ -6,3 +6,4 @@ Flask-Cors==3.0.8
 pathlib2==2.3.5
 six==1.15.0
 typing==3.7.4.3
+pytz==2020.1
