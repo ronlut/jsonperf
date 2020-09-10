@@ -67,6 +67,7 @@ export default {
         //   text: title,
         // },
         toolbox: {
+          top: "5%",
           feature: {
             saveAsImage: {
               title: "Save as PNG"
