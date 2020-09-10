@@ -29,6 +29,14 @@
       </template>
       <span>Toggle Theme</span>
     </v-tooltip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn icon href="mailto:hi@jsonperf.com" target="_blank" v-bind="attrs" v-on="on">
+          <v-icon>mdi-message</v-icon>
+        </v-btn>
+      </template>
+      <span>Feedback</span>
+    </v-tooltip>
 
     <template v-slot:extension>
       <v-tabs
