@@ -1,0 +1,13 @@
+files:
+  - title: tiny (50 bytes)
+    name: tiny.json
+    url: https://github.com/ronlut/jsonperf/blob/master/test_jsons/tiny.json
+    runs: 10000
+  - title: small (3.5 kb)
+    name: small.json
+    url: https://github.com/ronlut/jsonperf/blob/master/test_jsons/small.json
+    runs: 1000
+  - title: large (630 kb)
+    name: large.json
+    url: https://github.com/ronlut/jsonperf/blob/master/test_jsons/large.json
+    runs: 100
