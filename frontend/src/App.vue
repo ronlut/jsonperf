@@ -67,6 +67,7 @@
 import Results from "@/components/Results";
 import PYTHON3_RESULTS from "@/generated_results/python3.json"; // todo: ugly.
 import PYTHON2_RESULTS from "@/generated_results/python2.json"; // todo: ugly.
+import JAVA_RESULTS from "@/generated_results/java.json"; // todo: ugly.
 import Footer from "@/components/Footer";
 import UserBenchmark from "@/components/UserBenchmark";
 import TopBar from "@/components/TopBar";
@@ -75,7 +76,8 @@ export default {
   components: { TopBar, UserBenchmark, Footer, Results },
   RESULTS: {
     python3: PYTHON3_RESULTS,
-    python2: PYTHON2_RESULTS
+    python2: PYTHON2_RESULTS,
+    java: JAVA_RESULTS
   },
   props: {
     source: String
@@ -112,8 +114,8 @@ export default {
     frameworks: {
       python3: { title: "Python 3", icon: "mdi-language-python" },
       python2: { title: "Python 2", icon: "mdi-language-python" },
+      java: { title: "Java", icon: "mdi-language-java" },
       future: { title: "More on the way", icon: "mdi-dots-horizontal" },
-      // java: { title: "Java", icon: "mdi-language-java" },
       // golang: { title: "Go", icon: "mdi-language-go" },
       // nodejs: { title: "Node", icon: "mdi-nodejs" },
       // ruby: { title: "Ruby", icon: "mdi-language-ruby" },
