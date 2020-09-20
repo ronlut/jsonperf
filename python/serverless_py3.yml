@@ -9,6 +9,7 @@ package:
     - 'venv*/**'
 
 custom:
+  stage: ${opt:stage, self:provider.stage}
   wsgi:
     app: app.app
     packRequirements: false
