@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: jsonperf-java
+service: java
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
@@ -20,16 +20,18 @@ service: jsonperf-java
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+custom:
+  stage: ${opt:stage, self:provider.stage}
+
 provider:
   name: aws
   runtime: java8
+  stage: dev
   apiGateway:
     restApiId:
-      'Fn::ImportValue': LanguagesApiGw-restApiId
+      'Fn::ImportValue': LanguagesApiGw-restApiId-${self:custom.stage}
     restApiRootResourceId:
-      'Fn::ImportValue': LanguagesApiGw-rootResourceId
-    websocketApiId:
-      'Fn::ImportValue': LanguagesApiGw-websocketApiId
+      'Fn::ImportValue': LanguagesApiGw-rootResourceId-${self:custom.stage}
 
 # you can overwrite defaults here
 #  stage: dev
@@ -57,7 +59,7 @@ provider:
 
 # you can add packaging information here
 package:
-  artifact: target/jsonperf-dev.jar
+  artifact: target/java-dev.jar
 
 functions:
   java:
