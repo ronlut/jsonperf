@@ -24,6 +24,8 @@ import java.net.HttpURLConnection;
 import java.util.*;
 
 public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent>{
+    public static final String JSONPERF_COM = "https://jsonperf.com";
+
     public static void main(String[] args) {
         String body = "------WebKitFormBoundaryBEEXrEAnAes5TAvJ\r\nContent-Disposition: form-data; name=\"file\"; filename=\"test.json\"\r\nContent-Type: application/json\r\n\r\n\r\n------WebKitFormBoundaryBEEXrEAnAes5TAvJ--\r\n";
         Map<String, String> headers = new HashMap<>();
@@ -83,6 +85,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
                 withBody(resultJson);
         HashMap<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
+        headers.put(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, JSONPERF_COM);
         response.setHeaders(headers);
         return response;
     }
@@ -90,6 +93,7 @@ public class Handler implements RequestHandler<APIGatewayProxyRequestEvent, APIG
     private APIGatewayProxyResponseEvent errorResponse(String body, int status) {
         HashMap<String, String> headers = new HashMap<>();
         headers.put(FileUpload.CONTENT_TYPE, "text/html");
+        headers.put(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, JSONPERF_COM);
 
         return new APIGatewayProxyResponseEvent().
                 withHeaders(headers).
