@@ -101,6 +101,10 @@ jobs:
         if: matrix.setup.language == 'java'
         with:
           java-version: "${{ matrix.setup.version }}"
+      
+      - name: Build Java (Maven) # todo: move to a separate step and pull artifacts from there
+        if: matrix.setup.language == 'java'
+        run: mvn -B package --file pom.xml
 
       - name: install serverless and dependencies
         run: yarn add serverless && yarn install
