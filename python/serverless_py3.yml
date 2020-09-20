@@ -9,6 +9,7 @@ package:
     - 'venv*/**'
 
 custom:
+  stage: ${opt:stage, self:provider.stage}
   wsgi:
     app: app.app
     packRequirements: false
@@ -24,11 +25,9 @@ provider:
   runtime: python3.8
   apiGateway:
     restApiId:
-      'Fn::ImportValue': LanguagesApiGw-restApiId
+      'Fn::ImportValue': LanguagesApiGw-restApiId-${self:custom.stage}
     restApiRootResourceId:
-      'Fn::ImportValue': LanguagesApiGw-rootResourceId
-    websocketApiId:
-      'Fn::ImportValue': LanguagesApiGw-websocketApiId
+      'Fn::ImportValue': LanguagesApiGw-rootResourceId-${self:custom.stage}
 
 functions:
   python3:
