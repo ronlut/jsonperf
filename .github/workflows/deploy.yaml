@@ -24,6 +24,7 @@ jobs:
               - 'serverless.yml'
               - 'test_jsons/**/*'
               - 'python/**/*'
+              - 'java/**/*'
             frontend:
               - 'frontend/**/*'
   gh-pages:
