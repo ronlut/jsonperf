@@ -25,7 +25,6 @@ public abstract class GenerateResults {
     private static final String BASE_PATH = "../test_jsons/";
 
     public static void main(String[] args) throws Exception {
-        // todo: load jsons by files.yaml
         Yaml yaml = new Yaml(new Constructor(Files.class));
 
         Files files;
@@ -33,7 +32,6 @@ public abstract class GenerateResults {
             files = yaml.load(file);
         }
 
-        // todo: instantiate com.jsonperf.libraries, sort by ab
         InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("project.properties");
         Properties p = new Properties();
         p.load(is);
@@ -41,7 +39,6 @@ public abstract class GenerateResults {
         List<Library> libs = Instantiator.instantiate(p);
         libs.sort(Comparator.comparing(Library::getName));
 
-        // todo: create benchmark
         Runner benchmarkRunner = new Runner(libs);
         List<TitledBenchmark> results = new ArrayList<>();
 
