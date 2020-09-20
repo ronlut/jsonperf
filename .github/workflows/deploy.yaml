@@ -80,6 +80,10 @@ jobs:
             version: 2.7
             dir: python
             sls_file: serverless_py2.yml
+          - language: java
+            version: 8
+            dir: java
+            sls_file: serverless.yml
     steps:
       - uses: actions/checkout@v2
 
@@ -92,6 +96,11 @@ jobs:
         if: matrix.setup.language == 'python'
         with:
           python-version: "${{ matrix.setup.version }}"
+      
+      - uses: actions/setup-java@v1
+        if: matrix.setup.language == 'java'
+        with:
+          java-version: "${{ matrix.setup.version }}"
 
       - name: install serverless and dependencies
         run: yarn add serverless && yarn install
