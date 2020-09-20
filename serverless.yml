@@ -1,5 +1,8 @@
 service: api 
 
+custom:
+  stage: ${opt:stage, self:provider.stage}
+
 provider:
   name: aws
   stage: dev
@@ -10,7 +13,7 @@ resources:
     LanguagesApiGw:
       Type: AWS::ApiGateway::RestApi
       Properties:
-        Name: LanguagesApiGw
+        Name: LanguagesApiGw-${self:custom.stage}
 
   Outputs:
     apiGatewayRestApiId:
