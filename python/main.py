@@ -12,15 +12,23 @@ import benchmark
 import libraries
 from web import charts
 
-JSONS = OrderedDict([("tiny (50 bytes)", {"path": Path('../test_jsons/tiny.json'),
-                                          "url": "https://github.com/ronlut/jsonperf/blob/master/test_jsons/tiny.json",
-                                          "times": 10000}),
-                     ("small (3.5 kb)", {"path": Path('../test_jsons/small.json'),
-                                         "url": "https://github.com/ronlut/jsonperf/blob/master/test_jsons/small.json",
-                                         "times": 10000}),
-                     ("large (630 kb)", {"path": Path('../test_jsons/large.json'),
-                                         "url": "https://github.com/ronlut/jsonperf/blob/master/test_jsons/large.json",
-                                         "times": 100})])
+JSONS = OrderedDict([
+    ("tiny (0 objects)", {"path": Path('../test_jsons/tiny.json'),
+                          "url": "https://github.com/ronlut/jsonperf/blob/master/test_jsons/tiny.json",
+                          "times": 1000}),
+    ("small (1 object)", {"path": Path('../test_jsons/small.json'),
+                          "url": "https://github.com/ronlut/jsonperf/blob/master/test_jsons/small.json",
+                          "times": 1000}),
+    ("medium (10 objects)", {"path": Path('../test_jsons/medium.json'),
+                             "url": "https://github.com/ronlut/jsonperf/blob/master/test_jsons/medium.json",
+                             "times": 100}),
+    ("large (100 objects)", {"path": Path('../test_jsons/large.json'),
+                             "url": "https://github.com/ronlut/jsonperf/blob/master/test_jsons/large.json",
+                             "times": 100}),
+    ("twitter (630 kb)", {"path": Path('../test_jsons/large.json'),
+                          "url": "https://github.com/ronlut/jsonperf/blob/master/test_jsons/twitter.json",
+                          "times": 100})
+])
 
 
 def main():

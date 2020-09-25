@@ -1,100 +1,61 @@
 {
-  "web-app": {
-    "servlet": [
-      {
-        "servlet-name": "cofaxCDS",
-        "servlet-class": "org.cofax.cds.CDSServlet",
-        "init-param": {
-          "configGlossary:installationAt": "Philadelphia, PA",
-          "configGlossary:adminEmail": "ksm@pobox.com",
-          "configGlossary:poweredBy": "Cofax",
-          "configGlossary:poweredByIcon": "/images/cofax.gif",
-          "configGlossary:staticPath": "/content/static",
-          "templateProcessorClass": "org.cofax.WysiwygTemplate",
-          "templateLoaderClass": "org.cofax.FilesTemplateLoader",
-          "templatePath": "templates",
-          "templateOverridePath": "",
-          "defaultListTemplate": "listTemplate.htm",
-          "defaultFileTemplate": "articleTemplate.htm",
-          "useJSP": false,
-          "jspListTemplate": "listTemplate.jsp",
-          "jspFileTemplate": "articleTemplate.jsp",
-          "cachePackageTagsTrack": 200,
-          "cachePackageTagsStore": 200,
-          "cachePackageTagsRefresh": 60,
-          "cacheTemplatesTrack": 100,
-          "cacheTemplatesStore": 50,
-          "cacheTemplatesRefresh": 15,
-          "cachePagesTrack": 200,
-          "cachePagesStore": 100,
-          "cachePagesRefresh": 10,
-          "cachePagesDirtyRead": 10,
-          "searchEngineListTemplate": "forSearchEnginesList.htm",
-          "searchEngineFileTemplate": "forSearchEngines.htm",
-          "searchEngineRobotsDb": "WEB-INF/robots.db",
-          "useDataStore": true,
-          "dataStoreClass": "org.cofax.SqlDataStore",
-          "redirectionClass": "org.cofax.SqlRedirection",
-          "dataStoreName": "cofax",
-          "dataStoreDriver": "com.microsoft.jdbc.sqlserver.SQLServerDriver",
-          "dataStoreUrl": "jdbc:microsoft:sqlserver://LOCALHOST:1433;DatabaseName=goon",
-          "dataStoreUser": "sa",
-          "dataStorePassword": "dataStoreTestQuery",
-          "dataStoreTestQuery": "SET NOCOUNT ON;select test='test';",
-          "dataStoreLogFile": "/usr/local/tomcat/logs/datastore.log",
-          "dataStoreInitConns": 10,
-          "dataStoreMaxConns": 100,
-          "dataStoreConnUsageLimit": 100,
-          "dataStoreLogLevel": "debug",
-          "maxUrlLength": 500
+  "users": [
+    {
+      "id": "5f6dbf4fa43422511485b6dc",
+      "index": 0,
+      "guid": "4ae3f0a5-b0e2-450e-99cd-f00b4fa4a27d",
+      "isActive": false,
+      "balance": "$3,387.95",
+      "picture": "http://placehold.it/32x32",
+      "age": 34,
+      "eyeColor": 1,
+      "name": {
+        "first": "Rosales",
+        "last": "Vazquez"
+      },
+      "company": "REALYSIS",
+      "email": "rosales.vazquez@realysis.net",
+      "phone": "+1 (997) 453-3254",
+      "address": "917 Bevy Court, Jugtown, Utah, 5912",
+      "about": "Cupidatat aute in amet deserunt do nostrud tempor in. Velit eu proident ut ea consequat sit cillum nisi in voluptate non veniam ullamco. Ad nulla adipisicing dolor excepteur ullamco exercitation laboris do dolore laborum tempor.",
+      "registered": "Saturday, January 31, 2015 4:56 PM",
+      "latitude": "-83.173631",
+      "longitude": "22.992638",
+      "tags": [
+        "sunt",
+        "ad",
+        "ut",
+        "amet",
+        "dolore"
+      ],
+      "range": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "friends": [
+        {
+          "id": 0,
+          "name": "Norris Stevenson"
+        },
+        {
+          "id": 1,
+          "name": "Yvette Barrera"
+        },
+        {
+          "id": 2,
+          "name": "Alice Dorsey"
         }
-      },
-      {
-        "servlet-name": "cofaxEmail",
-        "servlet-class": "org.cofax.cds.EmailServlet",
-        "init-param": {
-          "mailHost": "mail1",
-          "mailHostOverride": "mail2"
-        }
-      },
-      {
-        "servlet-name": "cofaxAdmin",
-        "servlet-class": "org.cofax.cds.AdminServlet"
-      },
-      {
-        "servlet-name": "fileServlet",
-        "servlet-class": "org.cofax.cds.FileServlet"
-      },
-      {
-        "servlet-name": "cofaxTools",
-        "servlet-class": "org.cofax.cms.CofaxToolsServlet",
-        "init-param": {
-          "templatePath": "toolstemplates/",
-          "log": 1,
-          "logLocation": "/usr/local/tomcat/logs/CofaxTools.log",
-          "logMaxSize": "",
-          "dataLog": 1,
-          "dataLogLocation": "/usr/local/tomcat/logs/dataLog.log",
-          "dataLogMaxSize": "",
-          "removePageCache": "/content/admin/remove?cache=pages&id=",
-          "removeTemplateCache": "/content/admin/remove?cache=templates&id=",
-          "fileTransferFolder": "/usr/local/tomcat/webapps/content/fileTransferFolder",
-          "lookInContext": 1,
-          "adminGroupID": 4,
-          "betaServer": true
-        }
-      }
-    ],
-    "servlet-mapping": {
-      "cofaxCDS": "/",
-      "cofaxEmail": "/cofaxutil/aemail/*",
-      "cofaxAdmin": "/admin/*",
-      "fileServlet": "/static/*",
-      "cofaxTools": "/tools/*"
-    },
-    "taglib": {
-      "taglib-uri": "cofax.tld",
-      "taglib-location": "/WEB-INF/tlds/cofax.tld"
+      ],
+      "greeting": "Hello, Rosales! You have 10 unread messages.",
+      "favoriteFruit": "strawberry"
     }
-  }
+  ]
 }
