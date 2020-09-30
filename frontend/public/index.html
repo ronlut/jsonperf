@@ -1,19 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+
+    <!-- HTML Meta Tags -->
+    <title><%= htmlWebpackPlugin.options.title %> - Live Multi-Language JSON Performance Benchmark</title>
+    <meta name="description" content="An unbiased performance benchmark of JSON libraries. Currently supported Languages: Python. Coming: Java, GoLang, Node, Ruby, C, C#, C++, Rust">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:title" content="<%= htmlWebpackPlugin.options.title %> - Unbiased JSON Performance Benchmark" />
+    <meta property="og:url" content="https://jsonperf.com" />
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Live and Unbiased Multi-Language JSON Performance Benchmark">
+    <meta property="og:image" content="https://jsonperf.com<%- require('../src/assets/logo.png') %>">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= htmlWebpackPlugin.options.title %> - Unbiased JSON Performance Benchmark" />
+    <meta property="twitter:url" content="https://jsonperf.com" />
+    <meta name="twitter:description" content="Live and Unbiased Multi-Language JSON Performance Benchmark">
+    <meta name="twitter:image" content="https://jsonperf.com<%- require('../src/assets/logo.png') %>">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+</head>
+<body>
+<noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+</noscript>
+<div id="app"></div>
+<!-- built files will be auto injected -->
+</body>
 </html>
