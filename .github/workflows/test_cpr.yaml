@@ -1,0 +1,38 @@
+name: Generate static json results test
+on:
+  push:
+    branches:
+      - test_cpr
+jobs:
+  python_benchmark:
+    name: Run python benchmarks
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: python
+    strategy:
+      max-parallel: 1
+      matrix:
+        python-version: [ '2', '3' ]
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "${{ matrix.python-version }}.x"
+
+      - name: Install requirements
+        run: pip install -r requirements_py${{ matrix.python-version }}.txt
+
+      - name: Run benchmark
+        run: |
+          python main.py
+          mv results.json ../frontend/src/generated_results/python${{ matrix.python-version }}.json
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: "[auto] Update Results - Python ${{ matrix.python-version }}"
+          title: "[auto] Updated Results"
+          assignees: ronlut
+          branch: auto-results/test_cpr
