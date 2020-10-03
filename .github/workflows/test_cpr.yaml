@@ -26,7 +26,6 @@ jobs:
       - name: Run benchmark
         run: |
           python main.py
-          mv results.json ../frontend/src/generated_results/python${{ matrix.version }}.json
 
       - uses: actions/upload-artifact@v2
         with:
