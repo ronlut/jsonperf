@@ -14,4 +14,3 @@ else:
 
 def instantiate_libraries():
     return [lib() for lib in __all__]
-

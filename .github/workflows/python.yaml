@@ -28,12 +28,13 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements_py${{ matrix.setup.requirements_suffix }}.txt
-        pip install flake8 pytest
+        pip install pytest
     - name: Lint with flake8
       uses: TrueBrain/actions-flake8@master
       with:
         path: python
         max_line_length: 120
+        only_warn: 1
     - name: Test with pytest
       run: |
         pytest
