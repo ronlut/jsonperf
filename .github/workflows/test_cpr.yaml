@@ -26,12 +26,12 @@ jobs:
       - name: Run benchmark
         run: |
           python main.py
-          mv results.json python{{ matrix.version }}.json
+          mv results.json python${{ matrix.version }}.json
       - run: ls -R
 
       - uses: actions/upload-artifact@v2
         with:
-          path: ./python/python{{ matrix.version }}.json
+          path: ./python/python${{ matrix.version }}.json
   create-pull-request:
     needs: ['python-benchmark']
     runs-on: ubuntu-latest
