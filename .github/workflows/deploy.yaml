@@ -5,16 +5,6 @@ on:
     branches:
       - master
 jobs:
-  pre-ci:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: 'Block Concurrent Executions'
-        uses: softprops/turnstyle@v1
-        with:
-          same-branch-only: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   changes:
     runs-on: ubuntu-latest
     # Set job outputs to values from filter step
@@ -38,7 +28,7 @@ jobs:
               - 'frontend/**/*'
   gh-pages:
     name: Deploying to Github Pages
-    needs: [pre-ci, changes]
+    needs: [changes]
     if: ${{ needs.changes.outputs.frontend == 'true' || needs.changes.outputs.general == 'true' }}
     defaults:
       run:
