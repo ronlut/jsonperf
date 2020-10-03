@@ -3,10 +3,11 @@ on:
   push:
     branches:
       - master
+      - refactor_ci
     paths-ignore:
       - frontend/**
 jobs:
-  python_benchmark:
+  python-benchmark:
     name: Run python benchmarks
     runs-on: ubuntu-latest
     defaults:
@@ -14,27 +15,42 @@ jobs:
         working-directory: python
     strategy:
       matrix:
-#        python-version: [ '2', '3', 'pypy2', 'pypy3' ]
-        python-version: [ '2', '3' ]
+        version: [2, 3]
     steps:
       - uses: actions/checkout@v2
 
       - uses: actions/setup-python@v2
         with:
-          python-version: "${{ matrix.python-version }}.x"
+          python-version: "${{ matrix.version }}.x"
 
       - name: Install requirements
-        run: pip install -r requirements_py${{ matrix.python-version }}.txt
+        run: pip install -r requirements_py${{ matrix.version }}.txt
 
       - name: Run benchmark
         run: |
           python main.py
-          mv results.json ../frontend/src/generated_results/python${{ matrix.python-version }}.json
+          mv results.json python${{ matrix.version }}.json
+
+      - uses: actions/upload-artifact@v2
+        with:
+          path: ./python/python${{ matrix.version }}.json
+
+  create-pull-request:
+    needs: ['python-benchmark']
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        id: download
+        with:
+          name: artifact
+          path: ./frontend/src/generated_results  
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           commit-message: "[auto] Update Results"
-          title: "[auto] Updated Results for Python ${{ matrix.python-version }}"
+          title: "[auto] Updated Results"
           assignees: ronlut
-          branch: auto-results/python${{ matrix.python-version }}
+          branch: update-results
