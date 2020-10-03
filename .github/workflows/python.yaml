@@ -1,0 +1,39 @@
+name: Build and Test Python
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/python.yaml'
+      - 'test_jsons/**/*'
+      - 'python/**/*'
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: python
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        setup:
+          - version: 2.7
+            requirements_suffix: 2
+          - version: 3.8
+            requirements_suffix: 3
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.setup.version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.setup.version }}
+    - name: Install dependencies
+      run: |
+        pip install -r requirements_py${{ matrix.setup.requirements_suffix }}.txt
+        pip install flake8 pytest
+    - name: Lint with flake8
+      uses: TrueBrain/actions-flake8@master
+      with:
+        path: python
+        max_line_length: 120
+    - name: Test with pytest
+      run: |
+        pytest
