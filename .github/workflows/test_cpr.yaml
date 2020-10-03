@@ -41,7 +41,7 @@ jobs:
           assignees: ronlut
           branch: auto-results/test_cpr
   create-pull-request:
-    needs: ['python_benchmark']
+    needs: ['python-benchmark']
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
