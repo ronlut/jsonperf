@@ -42,10 +42,10 @@ jobs:
       - uses: actions/download-artifact@v2
         id: download
         with:
-          path: ./artifacts
+          path: ./frontend/src/generated_results
       
       - name: Display structure of downloaded files
-        run: ls -R ./artifacts
+        run: ls -R ./frontend/src/generated_results
 
       - name: 'Echo download path'
         run: echo ${{steps.download.outputs.download-path}}   
