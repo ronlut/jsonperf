@@ -26,12 +26,12 @@ jobs:
       - name: Run benchmark
         run: |
           python main.py
+          mv results.json python{{ matrix.version }}.json
       - run: ls -R
 
       - uses: actions/upload-artifact@v2
         with:
-          name: python${{ matrix.version }}.json
-          path: ./python/results.json
+          path: ./python/python{{ matrix.version }}.json
   create-pull-request:
     needs: ['python-benchmark']
     runs-on: ubuntu-latest
@@ -40,6 +40,7 @@ jobs:
 
       # This will download all artifacts created during the workflow to the root of the repository
       - uses: actions/download-artifact@v2
+        id: download
         with:
           path: ./artifacts
       
