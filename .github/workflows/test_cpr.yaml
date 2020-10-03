@@ -26,6 +26,7 @@ jobs:
       - name: Run benchmark
         run: |
           python main.py
+      - run: ls -R
 
       - uses: actions/upload-artifact@v2
         with:
