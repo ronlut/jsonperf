@@ -30,7 +30,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: python${{ matrix.version }}.json
-          path: results.json
+          path: ./results.json
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
