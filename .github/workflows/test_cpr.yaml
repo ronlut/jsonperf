@@ -33,14 +33,13 @@ jobs:
           name: python${{ matrix.version }}.json
           path: ./python/results.json
   create-pull-request:
-    name: Create results PR
     needs: ['python-benchmark']
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
       # This will download all artifacts created during the workflow to the root of the repository
-      - uses: actions/download-artifact@v1
+      - uses: actions/download-artifact@v2
         with:
           path: frontend/src/generated_results/
 
