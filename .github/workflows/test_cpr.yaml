@@ -32,15 +32,8 @@ jobs:
         with:
           name: python${{ matrix.version }}.json
           path: ./python/results.json
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          commit-message: "[auto] Update Results - Python ${{ matrix.python-version }}"
-          title: "[auto] Updated Results"
-          assignees: ronlut
-          branch: auto-results/test_cpr
   create-pull-request:
+    name: Create results PR
     needs: ['python-benchmark']
     runs-on: ubuntu-latest
     steps:
