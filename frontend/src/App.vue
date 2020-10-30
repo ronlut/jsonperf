@@ -19,16 +19,39 @@
       </v-alert>
       <v-container fluid>
         <v-row align="center" justify="center" class="text-center">
-          <v-col cols="12">
-            <Results :charts-data="results[selectedTab]"></Results>
-          </v-col>
-          <v-divider></v-divider>
           <v-col cols="10" lg="4">
-            <UserBenchmark
-              :frameworks="frameworks"
-              :selected-framework="selectedTab"
-              @input="userJsonSent"
-            />
+            <v-sheet
+                outlined
+                elevation="4"
+                class="mx-auto pa-3"
+                :style="`border-color: ${$vuetify.theme.currentTheme.accent};`"
+            >
+            <v-expansion-panels flat>
+              <v-expansion-panel>
+                <v-expansion-panel-header>
+                      <span class="text-h6"
+                      >Benchmark with your JSON! ({{ frameworks[selectedTab].title }})</span
+                      >
+                  <template v-slot:actions>
+                    <v-icon color="primary">
+                      $expand
+                    </v-icon>
+                  </template>
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <UserBenchmark
+                      :frameworks="frameworks"
+                      :selected-framework="selectedTab"
+                      @input="userJsonSent"
+                  />
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
+            </v-sheet>
+          </v-col>
+          <v-col cols="12" class="mt-5">
+            <h1>Predefined JSONs</h1>
+            <Results :charts-data="results[selectedTab]"></Results>
           </v-col>
         </v-row>
       </v-container>
