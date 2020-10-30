@@ -1,32 +1,24 @@
 <template>
-  <v-sheet
-    outlined
-    elevation="4"
-    class="mx-auto pa-10"
-    :style="`border-color: ${$vuetify.theme.currentTheme.accent};`"
-  >
-    <span class="text-sm-h5 text-h6"
-      >Benchmark with your JSON ({{ frameworks[selectedFramework].title }})</span
-    >
+  <div>
     <v-file-input
-      v-model="file"
-      ref="fileInput"
-      accept="application/json"
-      placeholder="Select a JSON file"
-      :rules="rules"
-      prepend-icon="mdi-code-json"
-      show-size
+        v-model="file"
+        ref="fileInput"
+        accept="application/json"
+        placeholder="Select a JSON file"
+        :rules="rules"
+        prepend-icon="mdi-code-json"
+        show-size
     ></v-file-input>
     <v-btn
-      @click="upload"
-      x-large
-      :loading="loading"
-      :color="$vuetify.theme.currentTheme.success"
-      :disabled="!file || $refs.fileInput.hasError"
+        @click="upload"
+        x-large
+        :loading="loading"
+        :color="$vuetify.theme.currentTheme.success"
+        :disabled="!file || $refs.fileInput.hasError"
     >
       Test!
     </v-btn>
-  </v-sheet>
+  </div>
 </template>
 <script>
 import axios from "axios";
