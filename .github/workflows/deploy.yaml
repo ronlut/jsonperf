@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - cf-vierfy
 jobs:
   changes:
     runs-on: ubuntu-latest
@@ -47,48 +48,3 @@ jobs:
       - name: Run deploy script
         run: |
           .github/deploy.sh
-  backend:
-    name: Deploying backend
-    needs: changes
-    if: ${{ needs.changes.outputs.backend == 'true' || needs.changes.outputs.general == 'true' }}
-    defaults:
-      run:
-        working-directory: ${{ matrix.setup.dir }}
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        setup:
-          - language: node
-            version: 14
-            dir: .
-            sls_file: serverless.yml
-          - language: python
-            version: 3.8
-            dir: python
-            sls_file: serverless_py3.yml
-          - language: python
-            version: 2.7
-            dir: python
-            sls_file: serverless_py2.yml
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v1
-        if: matrix.setup.language == 'node'
-        with:
-          node-version: "${{ matrix.setup.version }}"
-
-      - uses: actions/setup-python@v2
-        if: matrix.setup.language == 'python'
-        with:
-          python-version: "${{ matrix.setup.version }}"
-
-      - name: install serverless and dependencies
-        run: yarn add serverless && yarn install
-
-      - name: Deploy
-        run: npx serverless deploy --stage prod --config ${{ matrix.setup.sls_file }}
-        env:
-          SLS_DEBUG: 1
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
